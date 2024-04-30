@@ -6,20 +6,29 @@ using System.Threading.Tasks;
 
 namespace kangelane_cSharp
 {
-    internal class SuperHero: Hero
+    public class SuperHero: Hero
     {
+        private static Random random = new Random();
         private double skill;
+
         public double GetSkill() { return skill; }
-        public SuperHero(string name, string location) : base(name, location)
+
+        public SuperHero(string name, string location) 
+            : base(name, location)
         {
             Random random = new Random();
-            skill = random.NextDouble() * 4 + 1;
+            // returns a random floating-point number
+            // that is greater than or wqual to 0.0, and less than 1.0
+            skill = random.NextDouble() * 4 + 1; 
         }
+
+        //The override modifier is required to extend
+        //or modify the abstract or virtual implementation
+        //of an inherited method, property, indexer, or event.
         public override int Save(int numOfPeople)
         {
             double savePercentage = 95 + skill;
-            double peopleSaved = numOfPeople * (savePercentage / 100);
-            return (int)Math.Round(peopleSaved);
+            return (int)Math.Round(numOfPeople * (savePercentage / 100));
         }
         public override string ToString()
         {

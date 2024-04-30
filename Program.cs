@@ -8,40 +8,50 @@ namespace kangelane_cSharp
 {
     public class Program
     {
-        public static void Main(string[] args)
+        private static List<Hero> heroes = new List<Hero>();
+
+        public static void Main()
         {
-            Console.OutputEncoding = Encoding.UTF8;
-            Random a = new Random();
-            int N = a.Next();
-            try
+            ReadHeroData("heroes.txt");
+
+            foreach (var hero in heroes)
             {
-                StreamWriter text = new StreamWriter(@"heroes.txt", true);
-                Console.WriteLine("Enter some text: ");
-                string sentence = Console.ReadLine();
-                text.WriteLine(sentence);
-                text.Close();
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("error with the file");
-            }
-            try
-            {
-                StreamReader text = new StreamReader(@"heroes.txt", true);
-                Console.WriteLine("Enter some text: ");
-                string sentences = text.ReadToEnd();
-                text.Close();
-                // text.ReadLine(sentences);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("There is a error with reading the file");
+                Console.WriteLine(hero);
+                Console.WriteLine($"Saved {hero.Save(100)} out of 100 people in danger.");
             }
         }
 
-        private static StreamWriter StreamWriter(string v1, bool v2)
+        public static void ReadHeroData(string filename)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var parts = line.Split(" / ");
+                        var name = parts[0].Trim();
+                        var location = parts[1].Trim();
+                        Hero hero;
+
+                        if (name.EndsWith("*"))
+                        {
+                            hero = new SuperHero(name.TrimEnd('*'), location);
+                        }
+                        else
+                        {
+                            hero = new Hero(name, location);
+                        }
+
+                        heroes.Add(hero);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"An error occurred: {e.Message}");
+            }
         }
     }
 }

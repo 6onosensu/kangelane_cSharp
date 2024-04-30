@@ -19,10 +19,17 @@ namespace kangelane_cSharp
         }
 
         // get and set methods for name and location
-        public string GetName() { return name; }
-        public string SetName(string value) { return value; }
-        public string GetLocation() { return location; }
-        public string SetLocation(string value) { return value; }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public string Location
+        {
+            get { return location; }
+            set { location = value; }
+        }
 
         // methods Save and toString
         public virtual int Save(int numOfPeople)
