@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace kangelane_cSharp
 {
@@ -10,32 +11,31 @@ namespace kangelane_cSharp
     {
         private string name;
         private string location;
-
-        public Hero(string name, string location)
-        {
-            this.name = name;
-            this.location = location;
-        }
-
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
-
         public string Location
         {
             get { return location; }
             set { location = value; }
         }
-
-        public virtual int NumOfSavedPeople(int num)
+        public Hero(string name, string location)
         {
-            return (int)Math.Round(num * 0.95);
+            Name = name;
+            Location = location;
+
         }
+
+        public virtual int NumOfSavedPeople(int numInDanger)
+        {   
+            return (int)Math.Round(numInDanger * 0.95);
+        }
+
         public override string ToString()
         {
-            return $"Hero: {name}, Location: {location}";
+            return $"Hero: {Name}, Location: {Location}";
         }
     }
 }
