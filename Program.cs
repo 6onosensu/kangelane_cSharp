@@ -11,10 +11,11 @@ namespace kangelane_cSharp
     public class Program
     {
         private static List<Hero> heroes = new List<Hero>();
-        private static readonly string path = @"C:\work\kangelane_cSharp\heroes.txt";
+        private static readonly string path = @"C:\Users\opilane\source\repos\6onosensu\kangelane_cSharp\heroes.txt";
+        //private static readonly string path = @"C:\work\kangelane_cSharp\heroes.txt";
         public static void Main(string[] args)
         {
-            ReadHeroData(@"C:\work\kangelane_cSharp\heroes.txt");
+            ReadHeroData(path);
             foreach (var hero in heroes)
             {
                 Console.WriteLine(hero);
